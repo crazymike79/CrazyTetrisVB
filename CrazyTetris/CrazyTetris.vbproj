@@ -11,8 +11,24 @@
     <AssemblyName>CrazyTetris</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +62,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -72,11 +91,25 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="GameLogic.vb" />
+    <Compile Include="Game_Timer.vb" />
+    <Compile Include="GameForm.Designer.vb">
+      <DependentUpon>GameForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GameForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="HighScoreForm.Designer.vb">
+      <DependentUpon>HighScoreForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="HighScoreForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.vb">
+      <DependentUpon>MainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -94,16 +127,40 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
+    <Compile Include="SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <SplashScreen Include="SplashScreen.vb">
+      <SubType>Form</SubType>
+    </SplashScreen>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HighScoreForm.resx">
+      <DependentUpon>HighScoreForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\CrazyTetris.GameForm.resources" />
+    <EmbeddedResource Include="obj\Debug\CrazyTetris.Resources.resources" />
+    <EmbeddedResource Include="obj\Debug\CrazyTetris.SplashScreen.resources" />
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\CrazyTetris.exe.config" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -114,6 +171,128 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\CoreCompileInputs.cache" />
+    <None Include="obj\Debug\CrazyTetris.vbproj.GenerateResource.Cache" />
+    <None Include="obj\Debug\CrazyTetris.vbprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\CoreCompileInputs.cache" />
+    <None Include="Resources\blueblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cyanblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gameback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greenblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ibeam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ibeam_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftL_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leftZ_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logoback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mashup30x30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\orangeblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\purpleblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightL_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightZ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rightZ_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\splashback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Resources\splashback1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tee_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellowblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\CrazyTetris.exe" />
+    <Content Include="bin\Debug\CrazyTetris.pdb" />
+    <Content Include="bin\Debug\CrazyTetris.xml" />
+    <Content Include="obj\Debug\CrazyTetris.exe" />
+    <Content Include="obj\Debug\CrazyTetris.pdb" />
+    <Content Include="obj\Debug\CrazyTetris.vbproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CrazyTetris.xml" />
+    <Content Include="obj\Debug\TempPE\GameForm.Designer.vb.dll" />
+    <Content Include="obj\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
+    <Content Include="obj\Debug\TempPE\Resource1.Designer.vb.dll" />
+    <None Include="Resources\ScoreBoxEmpty.png" />
+    <None Include="Resources\9.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\7.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
