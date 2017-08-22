@@ -29,57 +29,64 @@ Partial Class MainMenu
         '
         'StartButton
         '
+        Me.StartButton.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.StartButton.BackColor = System.Drawing.Color.Black
-        Me.StartButton.Dock = System.Windows.Forms.DockStyle.Top
         Me.StartButton.ForeColor = System.Drawing.Color.Gold
         Me.StartButton.Location = New System.Drawing.Point(0, 0)
-        Me.StartButton.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.StartButton.Margin = New System.Windows.Forms.Padding(0)
         Me.StartButton.Name = "StartButton"
-        Me.StartButton.Size = New System.Drawing.Size(1168, 200)
+        Me.StartButton.Size = New System.Drawing.Size(900, 150)
         Me.StartButton.TabIndex = 0
         Me.StartButton.Text = "(P)lay Game!"
         Me.StartButton.UseVisualStyleBackColor = False
         '
         'HighScoreButton
         '
+        Me.HighScoreButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.HighScoreButton.BackColor = System.Drawing.Color.Black
-        Me.HighScoreButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.HighScoreButton.ForeColor = System.Drawing.Color.Gold
-        Me.HighScoreButton.Location = New System.Drawing.Point(0, 200)
-        Me.HighScoreButton.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.HighScoreButton.Location = New System.Drawing.Point(0, 150)
+        Me.HighScoreButton.Margin = New System.Windows.Forms.Padding(0)
         Me.HighScoreButton.Name = "HighScoreButton"
-        Me.HighScoreButton.Size = New System.Drawing.Size(585, 112)
+        Me.HighScoreButton.Size = New System.Drawing.Size(450, 150)
         Me.HighScoreButton.TabIndex = 1
-        Me.HighScoreButton.Text = "(Hi)gh Scores!"
+        Me.HighScoreButton.Text = "(H)igh Scores!"
         Me.HighScoreButton.UseVisualStyleBackColor = False
         '
         'ExitButton
         '
+        Me.ExitButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ExitButton.BackColor = System.Drawing.Color.Black
-        Me.ExitButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.ExitButton.ForeColor = System.Drawing.Color.Gold
-        Me.ExitButton.Location = New System.Drawing.Point(583, 200)
-        Me.ExitButton.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.ExitButton.Location = New System.Drawing.Point(450, 150)
+        Me.ExitButton.Margin = New System.Windows.Forms.Padding(0)
         Me.ExitButton.Name = "ExitButton"
-        Me.ExitButton.Size = New System.Drawing.Size(585, 112)
+        Me.ExitButton.Size = New System.Drawing.Size(450, 150)
         Me.ExitButton.TabIndex = 2
         Me.ExitButton.Text = "(E)xit Game"
         Me.ExitButton.UseVisualStyleBackColor = False
         '
         'MainMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(24.0!, 49.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AcceptButton = Me.StartButton
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
+        Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.ClientSize = New System.Drawing.Size(1168, 312)
+        Me.CancelButton = Me.ExitButton
+        Me.ClientSize = New System.Drawing.Size(900, 300)
         Me.ControlBox = False
         Me.Controls.Add(Me.ExitButton)
         Me.Controls.Add(Me.HighScoreButton)
         Me.Controls.Add(Me.StartButton)
         Me.Font = New System.Drawing.Font("AR DARLING", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(5, 4, 5, 4)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "MainMenu"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CrazyTetris Main Menu"
         Me.TopMost = True
         Me.ResumeLayout(False)
