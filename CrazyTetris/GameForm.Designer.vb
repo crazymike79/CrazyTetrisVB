@@ -217,10 +217,11 @@ Partial Class GameForm
         '
         Me.GameBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.GameBox.Cursor = System.Windows.Forms.Cursors.WaitCursor
-        Me.GameBox.Location = New System.Drawing.Point(0, -120)
+        Me.GameBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GameBox.Location = New System.Drawing.Point(0, 0)
         Me.GameBox.Margin = New System.Windows.Forms.Padding(0)
         Me.GameBox.Name = "GameBox"
-        Me.GameBox.Size = New System.Drawing.Size(300, 720)
+        Me.GameBox.Size = New System.Drawing.Size(300, 600)
         Me.GameBox.TabIndex = 0
         Me.GameBox.TabStop = False
         Me.GameBox.UseWaitCursor = True

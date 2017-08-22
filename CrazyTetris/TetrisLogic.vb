@@ -259,35 +259,35 @@
         Next
     End Sub
 
-    Shared Sub CopyPieceboard()
-        Dim pieceboardCopy(9, 19)
-        Dim i As Integer
-        Dim j As Integer
-        Dim L = pieceboard.GetLength(0)
-        Dim W = pieceboard.GetLength(1)
-        Dim LU = pieceboard.GetLength(0) - 1
-        Dim LL = pieceboard.GetLength(0) - pieceboard.GetLength(0)
-        Dim WU = pieceboard.GetLength(1) - 1
-        Dim WL = pieceboard.GetLength(1) - pieceboard.GetLength(1)
+    'Shared Sub CopyPieceboard()
+    '    Dim pieceboardCopy(9, 19)
+    '    Dim i As Integer
+    '    Dim j As Integer
+    '    Dim L = pieceboard.GetLength(0)
+    '    Dim W = pieceboard.GetLength(1)
+    '    Dim LU = pieceboard.GetLength(0) - 1
+    '    Dim LL = pieceboard.GetLength(0) - pieceboard.GetLength(0)
+    '    Dim WU = pieceboard.GetLength(1) - 1
+    '    Dim WL = pieceboard.GetLength(1) - pieceboard.GetLength(1)
 
-        For j = WL To WU
-            For i = LL To LU
-                If j <= 19 Then
-                    pieceboardCopy.SetValue(pieceboard.GetValue(i, j), i, j)
-                End If
-            Next
-        Next
+    '    For j = WL To WU
+    '        For i = LL To LU
+    '            If j <= 19 Then
+    '                pieceboardCopy.SetValue(pieceboard.GetValue(i, j), i, j)
+    '            End If
+    '        Next
+    '    Next
 
-        ReDim pieceboard(9, 19)
+    '    ReDim pieceboard(9, 19)
 
-        For j = WL To WU
-            For i = LL To LU
-                If j <= 19 Then
-                    pieceboard.SetValue(pieceboardCopy.GetValue(i, j), i, j)
-                End If
-            Next
-        Next
-    End Sub
+    '    For j = WL To WU
+    '        For i = LL To LU
+    '            If j <= 19 Then
+    '                pieceboard.SetValue(pieceboardCopy.GetValue(i, j), i, j)
+    '            End If
+    '        Next
+    '    Next
+    'End Sub
 
     '~~~~~
 

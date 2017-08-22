@@ -9,7 +9,7 @@ Public Class GameForm
     Property GameTickCount As Integer
     Property GameIsRunning As Boolean
     Dim WithEvents Tick_Timer As New Timer() With {.Interval = 200}
-    Protected Shared g As Graphics
+    Shared g As Graphics
 
     '~~~~EVENTS~~~~
 
@@ -102,7 +102,7 @@ Public Class GameForm
     '~~~~~
 
     Private Shared Sub GameBox_Paint(sender As Object, e As PaintEventArgs) Handles GameBox.Paint
-
+        'Dim g As Graphics = MainMenu.Game.GameBox.CreateGraphics
         g = e.Graphics
 
         If MainMenu.Game.GameIsRunning = True Then
