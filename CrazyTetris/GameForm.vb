@@ -1,140 +1,183 @@
 ﻿Imports System.Collections.ObjectModel
 
 Public Class GameForm
-    Inherits Form
+        Inherits Form
 
     '~~~~VARIABLES~~~~
 
     Property TickCount As Integer
     Property GameTickCount As Integer
-    Property GameIsRunning As Boolean
+    Public GameIsRunning As New Boolean
     Dim WithEvents Tick_Timer As New Timer() With {.Interval = 200}
     Shared g As Graphics
+    Public DrawBitmap As New Bitmap(300, 600)
+
 
     '~~~~EVENTS~~~~
 
     Public Sub New()
-        ' This call is required by the designer.
-        InitializeComponent()
-        ' Add any initialization after the InitializeComponent() call.
-    End Sub
+            ' This call is required by the designer.
+            InitializeComponent()
+            ' Add any initialization after the InitializeComponent() call.
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Protected Overridable Sub MenuButton_Click(
+        Protected Overridable Sub MenuButton_Click(
                                               sender As Object,
                                               e As EventArgs) _
                                               Handles MenuButton.Click
-        MainMenu.Visible = True
-        Visible = False
-    End Sub
+            MainMenu.Visible = True
+            Visible = False
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Protected Overridable Sub OnInitialize(
+        Protected Overridable Sub OnInitialize(
                                           sender As Object,
                                           e As EventArgs) _
                                           Handles Me.Load
 
-        GameBox.BringToFront()
-        If TickCount = 0 Then GameBox.BackgroundImage = My.Resources._9
-        Tick_Timer.Start()
-        Console.Beep()
-    End Sub
+            GameBox.BringToFront()
+            If TickCount = 0 Then GameBox.BackgroundImage = My.Resources._9
+            Tick_Timer.Start()
+            Console.Beep()
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Protected Overridable Sub OnVisible(
+        Protected Overridable Sub OnVisible(
                                        sender As Object,
                                        e As EventArgs) _
                                        Handles Me.VisibleChanged
-        If sender.Visible = True Then
-            Tick_Timer.Start()
-            GameIsRunning = True
-        End If
-        If sender.Visible = False Then
-            Tick_Timer.Stop()
-            GameIsRunning = False
-        End If
-    End Sub
+            If sender.Visible = True Then
+                Tick_Timer.Start()
+                GameIsRunning = True
+            End If
+            If sender.Visible = False Then
+                Tick_Timer.Stop()
+                GameIsRunning = False
+            End If
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Protected Overridable Sub OnGamePanelClose(
+        Protected Overridable Sub OnGamePanelClose(
                                               sender As Object,
                                               e As EventArgs) _
                                               Handles Me.FormClosed
-        ChunkUpdater.CancelAsync()
-        Tick_Timer.Stop()
-        TickCount = 0
-        MainMenu.IsNewGame = True
-        MainMenu.Visible = True
-    End Sub
+            ChunkUpdater.CancelAsync()
+            Tick_Timer.Stop()
+            TickCount = 0
+            MainMenu.IsNewGame = True
+            MainMenu.Visible = True
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Protected Overridable Sub OnTimer_Tick(
+        Protected Overridable Sub OnTimer_Tick(
                                           sender As Object,
                                           e As EventArgs) _
                                           Handles Tick_Timer.Tick
-        If GameIsRunning = False Then
-            Close()
-        End If
-        TickCount += 1
-        MainMenu.Game.ScoreNumOverlay.Text = TetrisLogic.Score
-        MainMenu.Game.LevelNumOverlay.Text = TetrisLogic.Level
-        If ChunkUpdater.IsBusy = False Then _
+            If GameIsRunning = False Then
+                Close()
+            End If
+            TickCount += 1
+            MainMenu.Game.ScoreNumOverlay.Text = TetrisLogic.Score
+            MainMenu.Game.LevelNumOverlay.Text = TetrisLogic.Level
+            If ChunkUpdater.IsBusy = False Then _
                  ChunkUpdater.RunWorkerAsync()
-        HandleTickCount.DoStep()
-    End Sub
+            HandleTickCount.DoStep()
+        End Sub
 
-    '~~~~~
+        '~~~~~
 
-    Private Sub ChunkUpdater_DoWork(
+        Private Sub ChunkUpdater_DoWork(
                                    sender As Object,
                                    e As System.ComponentModel.DoWorkEventArgs) _
                                    Handles ChunkUpdater.DoWork
-        Dim worker As System.ComponentModel.BackgroundWorker
-        worker = CType(sender, System.ComponentModel.BackgroundWorker)
-        TetrisLogic.ChunkUpdate(worker, e)
-    End Sub
+            Dim worker As System.ComponentModel.BackgroundWorker
+            worker = CType(sender, System.ComponentModel.BackgroundWorker)
+            TetrisLogic.ChunkUpdate(worker, e)
+        End Sub
 
     '~~~~~
 
-    Private Shared Sub GameBox_Paint(sender As Object, e As PaintEventArgs) Handles GameBox.Paint
-        'Dim g As Graphics = MainMenu.Game.GameBox.CreateGraphics
-        g = e.Graphics
+    'Private Sub GameBox_Paint(sender As Object, e As PaintEventArgs) Handles GameBox.Paint
+    '    g = e.Graphics
+    'Dim DrawBitmap As New Bitmap(300, 600)
+    'Dim i As Integer
+    'Dim j As Integer
+    'Dim L = TetrisLogic.pieceboard.GetLength(0)
+    'Dim W = TetrisLogic.pieceboard.GetLength(1)
+    'Dim LU = TetrisLogic.pieceboard.GetLength(0) - 1
+    'Dim LL = TetrisLogic.pieceboard.GetLength(0) - TetrisLogic.pieceboard.GetLength(0)
+    'Dim WU = TetrisLogic.pieceboard.GetLength(1) - 1
+    'Dim WL = TetrisLogic.pieceboard.GetLength(1) - TetrisLogic.pieceboard.GetLength(1)
 
-        If MainMenu.Game.GameIsRunning = True Then
-            'TetrisLogic.CopyPieceboard()
-            Dim i As Integer
-            Dim j As Integer
-            Dim L = TetrisLogic.pieceboard.GetLength(0)
-            Dim W = TetrisLogic.pieceboard.GetLength(1)
-            Dim LU = TetrisLogic.pieceboard.GetLength(0) - 1
-            Dim LL = TetrisLogic.pieceboard.GetLength(0) - TetrisLogic.pieceboard.GetLength(0)
-            Dim WU = TetrisLogic.pieceboard.GetLength(1) - 1
-            Dim WL = TetrisLogic.pieceboard.GetLength(1) - TetrisLogic.pieceboard.GetLength(1)
+    'For j = WL To WU
+    '    For i = LL To LU
+    '        If j >= 4 Then
+    '            Dim p As New Point(i * 30, (j - 4) * 30)
+    '            TetrisLogic.ChunkIndex = CUInt(TetrisLogic.pieceboard.GetValue(i, j))
+    '            Dim ChunkBitmap As New Bitmap(TetrisLogic.ChunkImage)
+    '            Dim pt As New Point(0, 0)
+    '            Dim color As New Color
+    '            Dim rect As RectangleF = TetrisLogic.ChunkImage.GetBounds(GraphicsUnit.Pixel)
 
-            'DEBUG
-            Console.WriteLine("~~~~Drawing GameBox~~~~")
-            Console.WriteLine("pieceboard Length: " + CStr(L))
-            Console.WriteLine("pieceboard Width: " + CStr(W))
-            'END DEBUG
+    '            For y = rect.Y To rect.Height
+    '                For x = rect.X To rect.Width
+    '                    color = ChunkBitmap.GetPixel(pt.X, pt.Y)
+    '                    DrawBitmap.SetPixel(p.X + pt.X, p.Y + pt.Y, color)
+    '                Next
+    '            Next
+    '            'DEBUG: Confirm ChunkIndex and p after image drawing
+    '            Console.WriteLine _
+    '                ($"~~~~Drew Image {TetrisLogic.ChunkIndex} to GameBox at location {p}~~~~") 'DEBUG
+    '        End If
+    '    Next
+    'Next
+    'End Sub
 
-            For j = WL To WU
-                For i = LL To LU
-                    If j >= 4 Then
-                        Dim p As New Point(i * 30, (j - 4) * 30)
-                        TetrisLogic.ChunkIndex = CUInt(TetrisLogic.pieceboard.GetValue(i, j))
-                        g.DrawImage(TetrisLogic.ChunkImage, p)
+    Sub MakeDrawBitmap()
+        Dim DrawBitmap As New Bitmap(300, 600)
+        Dim i As Integer
+        Dim j As Integer
+        Dim L = TetrisLogic.pieceboard.GetLength(0)
+        Dim W = TetrisLogic.pieceboard.GetLength(1)
+        Dim LU = TetrisLogic.pieceboard.GetLength(0) - 1
+        Dim LL = TetrisLogic.pieceboard.GetLength(0) - TetrisLogic.pieceboard.GetLength(0)
+        Dim WU = TetrisLogic.pieceboard.GetLength(1) - 1
+        Dim WL = TetrisLogic.pieceboard.GetLength(1) - TetrisLogic.pieceboard.GetLength(1)
 
-                        'DEBUG: Confirm ChunkIndex and p after image drawing
-                        Console.WriteLine _
-                            ($"~~~~Drew Image {TetrisLogic.ChunkIndex} to GameBox at location {p}~~~~") 'DEBUG
-                    End If
-                Next
+        For j = WL To WU
+            For i = LL To LU
+                If j > 1 Then
+                    Dim p As New Point(i * 30, (j - 2) * 30)
+                    TetrisLogic.ChunkIndex = CUInt(TetrisLogic.pieceboard.GetValue(i, j))
+                    Dim ChunkBitmap As New Bitmap(TetrisLogic.ChunkImage)
+                    'Dim pt As New Point(0, 0)
+                    Dim color As New Color
+                    Dim rect As RectangleF = TetrisLogic.ChunkImage.GetBounds(GraphicsUnit.Pixel)
+                    Dim x, y As New Integer
+                    x = rect.X
+                    y = rect.Y
+
+                    For y = rect.Y To (rect.Height - 1)
+                        For x = rect.X To (rect.Width - 1)
+                            color = ChunkBitmap.GetPixel(x, y)
+                            DrawBitmap.SetPixel(p.X + x, p.Y + y, color)
+                            'Console.WriteLine($"Drew pixel ({p.X + x}, {p.Y + y}) the color {color}.")
+                        Next
+                    Next
+                    Console.WriteLine _
+                    ($"~~~~Drew Image {ChunkBitmap} to DrawBitmap at location {p}~~~~") 'DEBUG
+                End If
             Next
-        End If
+        Next
+        'DEBUG: 
+        Console.WriteLine($"DrawBitmap Bounds: {DrawBitmap.GetBounds(GraphicsUnit.Pixel)}")
+        GameBox.Image = DrawBitmap
+        Console.WriteLine("Image Set!!!")
     End Sub
 End Class

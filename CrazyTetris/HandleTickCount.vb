@@ -1,6 +1,12 @@
 ﻿Public Class HandleTickCount
 
     'Public Shared needspaint As Boolean
+    'Public Shared Event Bitmap_Changed(ByVal sender As Object, ByVal e As EventArgs)
+    'Shared s As New Size(300, 600)
+    'Shared pd As New Padding(0, 0, 0, 0)
+    'Public Shared WithEvents DrawBox As New PictureBox With {.Size = s, .Visible = False, .Margin = pd}
+    Shared g As Graphics
+    Shared hit_detect_board(9, 20) As Boolean
 
     '~~~~~
 
@@ -48,6 +54,7 @@
     '~~~~~
 
     Shared Sub RunGameStep()
+
         MainMenu.Game.GameIsRunning = True
         'MainMenu.Game.GameBox.Hide()
         'Check if piece is ready to be moved down
@@ -87,7 +94,8 @@
             TetrisLogic.GameboardToPieceboard()
             TetrisLogic.PiecemapToPieceboard()
             TetrisLogic.newpiece = False
-            MainMenu.Game.GameBox.Refresh()
+            MainMenu.Game.MakeDrawBitmap()
+            'MainMenu.Game.GameBox.Refresh()
             Exit Sub
             'needspaint = True
         End If
@@ -96,7 +104,9 @@
         If TetrisLogic.movepiece = True Then
             MovePieceDown()
             TetrisLogic.movepiece = False
-            MainMenu.Game.GameBox.Refresh()
+            MainMenu.Game.MakeDrawBitmap()
+            'MainMenu.Game.GameBox.Refresh()
+            'MainMenu.Game.GameBox.Image = MainMenu.Game.DrawBitmap
             Exit Sub
         End If
 
@@ -107,9 +117,7 @@
         'MainMenu.Game.GameBox.Show()
     End Sub
 
-    '****
-
-
+    '~~~~~
 
     Shared Sub NextPieceNumToOverlay()
         Select Case TetrisLogic.NextPieceNum
@@ -130,6 +138,21 @@
     End Sub
 
     Shared Sub MovePieceDown()
+        Dim i As New Integer
+        Dim j As New Integer
+        Dim L = TetrisLogic.gameboard.GetLength(0)
+        Dim W = TetrisLogic.gameboard.GetLength(1)
+        Dim LU = L - 1
+        Dim LL = L - L
+        Dim WU = W - 1
+        Dim WL = W - W
 
+        For j = WL To WU
+            For i = LL To LU
+                If TetrisLogic.gameboard.GetValue(i, j)!= 0 Then
+                    hit_detect_board.SetValue(True, i, j)
+                End If
+            Next
+        Next
     End Sub
 End Class

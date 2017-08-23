@@ -24,8 +24,8 @@
 
     Private Sub HighScoreButton_Click(sender As Object, e As EventArgs) Handles HighScoreButton.Click
         Dim HighScores As New HighScoreForm() With {
-            .Visible = True
-        }
+        .Visible = True
+    }
         Visible = False
     End Sub
 

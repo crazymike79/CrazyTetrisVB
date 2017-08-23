@@ -23,6 +23,8 @@ Partial Class GameForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GameLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
+        Me.MenuButton = New System.Windows.Forms.Button()
+        Me.ChunkUpdater = New System.ComponentModel.BackgroundWorker()
         Me.NextBox = New System.Windows.Forms.Panel()
         Me.NextLabelOverlay = New System.Windows.Forms.Label()
         Me.NextPieceOverlay = New System.Windows.Forms.PictureBox()
@@ -32,10 +34,8 @@ Partial Class GameForm
         Me.LevelBox = New System.Windows.Forms.Panel()
         Me.LevelNumOverlay = New System.Windows.Forms.Label()
         Me.LevelOverlay = New System.Windows.Forms.Label()
-        Me.MenuButton = New System.Windows.Forms.Button()
         Me.GamePanel = New System.Windows.Forms.Panel()
         Me.GameBox = New System.Windows.Forms.PictureBox()
-        Me.ChunkUpdater = New System.ComponentModel.BackgroundWorker()
         Me.GameLayoutPanel.SuspendLayout()
         Me.NextBox.SuspendLayout()
         CType(Me.NextPieceOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +69,26 @@ Partial Class GameForm
         Me.GameLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.GameLayoutPanel.Size = New System.Drawing.Size(300, 680)
         Me.GameLayoutPanel.TabIndex = 0
+        '
+        'MenuButton
+        '
+        Me.MenuButton.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.GameLayoutPanel.SetColumnSpan(Me.MenuButton, 3)
+        Me.MenuButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.MenuButton.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.MenuButton.Font = New System.Drawing.Font("AR DARLING", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuButton.Location = New System.Drawing.Point(0, 640)
+        Me.MenuButton.Margin = New System.Windows.Forms.Padding(0)
+        Me.MenuButton.Name = "MenuButton"
+        Me.MenuButton.Size = New System.Drawing.Size(300, 40)
+        Me.MenuButton.TabIndex = 7
+        Me.MenuButton.Text = "Main Menu"
+        Me.MenuButton.UseVisualStyleBackColor = False
+        '
+        'ChunkUpdater
+        '
+        Me.ChunkUpdater.WorkerReportsProgress = True
+        Me.ChunkUpdater.WorkerSupportsCancellation = True
         '
         'NextBox
         '
@@ -185,21 +205,6 @@ Partial Class GameForm
         Me.LevelOverlay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.LevelOverlay.UseMnemonic = False
         '
-        'MenuButton
-        '
-        Me.MenuButton.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.GameLayoutPanel.SetColumnSpan(Me.MenuButton, 3)
-        Me.MenuButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.MenuButton.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.MenuButton.Font = New System.Drawing.Font("AR DARLING", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuButton.Location = New System.Drawing.Point(0, 640)
-        Me.MenuButton.Margin = New System.Windows.Forms.Padding(0)
-        Me.MenuButton.Name = "MenuButton"
-        Me.MenuButton.Size = New System.Drawing.Size(300, 40)
-        Me.MenuButton.TabIndex = 7
-        Me.MenuButton.Text = "Main Menu"
-        Me.MenuButton.UseVisualStyleBackColor = False
-        '
         'GamePanel
         '
         Me.GamePanel.BackgroundImage = Global.CrazyTetris.My.Resources.Resources.gameback
@@ -222,15 +227,11 @@ Partial Class GameForm
         Me.GameBox.Margin = New System.Windows.Forms.Padding(0)
         Me.GameBox.Name = "GameBox"
         Me.GameBox.Size = New System.Drawing.Size(300, 600)
+        Me.GameBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.GameBox.TabIndex = 0
         Me.GameBox.TabStop = False
         Me.GameBox.UseWaitCursor = True
         Me.GameBox.WaitOnLoad = True
-        '
-        'ChunkUpdater
-        '
-        Me.ChunkUpdater.WorkerReportsProgress = True
-        Me.ChunkUpdater.WorkerSupportsCancellation = True
         '
         'GameForm
         '

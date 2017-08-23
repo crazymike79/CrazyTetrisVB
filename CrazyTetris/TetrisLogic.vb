@@ -1,7 +1,7 @@
 ﻿Public Class TetrisLogic
 
-    Public Shared gameboard(9, 23) As UInteger
-    Public Shared pieceboard(9, 23) As UInteger
+    Public Shared gameboard(9, 21) As UInteger
+    Public Shared pieceboard(9, 21) As UInteger
 
     Public Shared piecemap(1, 3) As UInteger
     Public Shared rightEll(1, 3) As UInteger
@@ -217,7 +217,7 @@
         iBeam.SetValue(CUInt(5), 0, 2)
         iBeam.SetValue(CUInt(5), 0, 3)
 
-        'DEBUG
+        'DEBUG: rightEll test after DefinePieces()
         Dim i As UInteger
         Dim j As UInteger
         Dim T = rightEll.Length
@@ -237,8 +237,9 @@
         Next
         Console.WriteLine()
         'END DEBUG
-
     End Sub
+
+    '~~~~~
 
     Shared Sub GameboardToPieceboard()
         Dim i As New Integer
@@ -259,46 +260,16 @@
         Next
     End Sub
 
-    'Shared Sub CopyPieceboard()
-    '    Dim pieceboardCopy(9, 19)
-    '    Dim i As Integer
-    '    Dim j As Integer
-    '    Dim L = pieceboard.GetLength(0)
-    '    Dim W = pieceboard.GetLength(1)
-    '    Dim LU = pieceboard.GetLength(0) - 1
-    '    Dim LL = pieceboard.GetLength(0) - pieceboard.GetLength(0)
-    '    Dim WU = pieceboard.GetLength(1) - 1
-    '    Dim WL = pieceboard.GetLength(1) - pieceboard.GetLength(1)
-
-    '    For j = WL To WU
-    '        For i = LL To LU
-    '            If j <= 19 Then
-    '                pieceboardCopy.SetValue(pieceboard.GetValue(i, j), i, j)
-    '            End If
-    '        Next
-    '    Next
-
-    '    ReDim pieceboard(9, 19)
-
-    '    For j = WL To WU
-    '        For i = LL To LU
-    '            If j <= 19 Then
-    '                pieceboard.SetValue(pieceboardCopy.GetValue(i, j), i, j)
-    '            End If
-    '        Next
-    '    Next
-    'End Sub
-
     '~~~~~
 
     Shared Sub PiecemapToPieceboard()
-        pieceboard.SetValue(piecemap.GetValue(0, 0), 5, 4)
-        pieceboard.SetValue(piecemap.GetValue(0, 1), 5, 5)
-        pieceboard.SetValue(piecemap.GetValue(0, 2), 5, 6)
-        pieceboard.SetValue(piecemap.GetValue(0, 3), 5, 7)
-        pieceboard.SetValue(piecemap.GetValue(1, 0), 6, 4)
-        pieceboard.SetValue(piecemap.GetValue(1, 1), 6, 5)
-        pieceboard.SetValue(piecemap.GetValue(1, 2), 6, 6)
-        pieceboard.SetValue(piecemap.GetValue(1, 3), 6, 7)
+        pieceboard.SetValue(piecemap.GetValue(0, 0), 4, 0)
+        pieceboard.SetValue(piecemap.GetValue(0, 1), 4, 1)
+        pieceboard.SetValue(piecemap.GetValue(0, 2), 4, 2)
+        pieceboard.SetValue(piecemap.GetValue(0, 3), 4, 3)
+        pieceboard.SetValue(piecemap.GetValue(1, 0), 5, 0)
+        pieceboard.SetValue(piecemap.GetValue(1, 1), 5, 1)
+        pieceboard.SetValue(piecemap.GetValue(1, 2), 5, 2)
+        pieceboard.SetValue(piecemap.GetValue(1, 3), 5, 3)
     End Sub
 End Class
