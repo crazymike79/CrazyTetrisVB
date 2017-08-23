@@ -145,10 +145,10 @@ Public Class GameForm
         Dim j As Integer
         Dim L = TetrisLogic.pieceboard.GetLength(0)
         Dim W = TetrisLogic.pieceboard.GetLength(1)
-        Dim LU = TetrisLogic.pieceboard.GetLength(0) - 1
-        Dim LL = TetrisLogic.pieceboard.GetLength(0) - TetrisLogic.pieceboard.GetLength(0)
-        Dim WU = TetrisLogic.pieceboard.GetLength(1) - 1
-        Dim WL = TetrisLogic.pieceboard.GetLength(1) - TetrisLogic.pieceboard.GetLength(1)
+        Dim LU = L - 1
+        Dim LL = L - L
+        Dim WU = W - 1
+        Dim WL = W - W
 
         For j = WL To WU
             For i = LL To LU

@@ -138,21 +138,21 @@
     End Sub
 
     Shared Sub MovePieceDown()
-        Dim i As New Integer
-        Dim j As New Integer
-        Dim L = TetrisLogic.gameboard.GetLength(0)
-        Dim W = TetrisLogic.gameboard.GetLength(1)
-        Dim LU = L - 1
-        Dim LL = L - L
-        Dim WU = W - 1
-        Dim WL = W - W
+        'Dim i As New Integer
+        'Dim j As New Integer
+        'Dim L = TetrisLogic.gameboard.GetLength(0)
+        'Dim W = TetrisLogic.gameboard.GetLength(1)
+        'Dim LU = L - 1
+        'Dim LL = L - L
+        'Dim WU = W - 1
+        'Dim WL = W - W
 
-        For j = WL To WU
-            For i = LL To LU
-                If TetrisLogic.gameboard.GetValue(i, j)!= 0 Then
-                    hit_detect_board.SetValue(True, i, j)
-                End If
-            Next
-        Next
+        'For j = WL To WU
+        '    For i = LL To LU
+        '        If TetrisLogic.gameboard.GetValue(i, j) = 0 Then
+        '            hit_detect_board.SetValue(True, i, j)
+        '        End If
+        '    Next
+        'Next
     End Sub
 End Class
