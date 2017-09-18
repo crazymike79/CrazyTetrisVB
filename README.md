@@ -1,5 +1,4 @@
-# crazyTetris
-Tetris Game
+#CrazyTetris
+VisualBasic Tetris clone.
 
-The beginnings of my kick ass Tetris game to become World Tetris Championship, the first game in the arcade.
-
+Micheal Judkins 2017
